@@ -32,7 +32,6 @@ MIT / BSD
 - Ensure privileged permissions are set for the user executing this role to:
   - Install packages.
   - Manage SElinux settings and configurations.
-  - Edit *GRUB_CMDLINE_LINUX* in `/etc/default/grub`.
 
 ## Dependencies
 
@@ -51,7 +50,13 @@ Compatible with the following list of operating systems:
 
 | Variable name | Description |
 |---------------|-------------|
-| ... | ... |
+| role_selinux_required_package_list | A per distribution package list. |
+| role_selinux_required_packages | Rendered list of distribution package list. |
+| role_selinux_state | The enforcing state. |
+| role_selinux_policy | The policy.  |
+| role_selinux_relabel | Whether to relabel at boot. |
+| role_selinux_reboot_required | Whether to reboot after changes are set.  |
+| role_selinux_dummy | Whether to ignore specific tasks that could render as an error. |
 
 ## Example Playbook
 
