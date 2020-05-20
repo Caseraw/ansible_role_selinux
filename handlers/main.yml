@@ -1,0 +1,9 @@
+---
+- name: Ensure machine is rebooted
+  reboot:
+  when:
+    - not role_selinux_dummy
+    - role_selinux_reboot_required
+  listen: reboot_if_needed
+
+...

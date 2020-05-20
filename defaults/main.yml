@@ -1,0 +1,29 @@
+---
+### Required packages
+role_selinux_required_package_list:
+  RedHat_7:
+    - libselinux-python
+    - libsemanage-python
+    - policycoreutils-python
+    - selinux-policy
+  RedHat_8:
+    - python3-libselinux
+    - python3-libsemanage
+    - python3-policycoreutils
+
+role_selinux_required_packages: '{{ role_selinux_required_package_list[ansible_distribution + "_" + ansible_distribution_major_version] | default([]) }}'
+
+### State and Policy
+role_selinux_state: enforcing
+role_selinux_policy: targeted
+
+### Relabel if required
+role_selinux_relabel: False
+
+### Reboot if required
+role_selinux_reboot_required: True
+
+### Stubs
+role_selinux_dummy: False
+
+...

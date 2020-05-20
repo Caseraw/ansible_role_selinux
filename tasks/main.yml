@@ -1,0 +1,24 @@
+---
+- name: Ensure required packages are installed
+  package:
+    name: '{{ role_selinux_required_packages }}'
+    state: present
+
+- name: Set SElinux state and policy
+  selinux:
+    state: '{{ role_selinux_state }}'
+    policy: '{{ role_selinux_policy }}'
+  when:
+    - not role_selinux_dummy
+  notify: reboot_if_needed
+
+- name: Ensure autorelabel at next boot
+  file:
+    path: /.autorelabel
+    state: touch
+  when:
+    - role_selinux_relabel
+    - not role_selinux_dummy
+  notify: reboot_if_needed
+
+...
