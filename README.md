@@ -69,8 +69,22 @@ Compatible with the following list of operating systems:
     - import_role:
         name: ansible_role_selinux
       vars:
-        var1: test1
-        var2: test2
+        role_selinux_required_package_list:
+          RedHat_7:
+            - libselinux-python
+            - libsemanage-python
+            - policycoreutils-python
+            - selinux-policy
+          RedHat_8:
+            - python3-libselinux
+            - python3-libsemanage
+            - python3-policycoreutils
+        role_selinux_required_packages: '{{ role_selinux_required_package_list[ansible_distribution + "_" + ansible_distribution_major_version] | default([]) }}'
+        role_selinux_state: enforcing
+        role_selinux_policy: targeted
+        role_selinux_relabel: False
+        role_selinux_reboot_required: True
+        role_selinux_dummy: False
 
 ...
 ```
